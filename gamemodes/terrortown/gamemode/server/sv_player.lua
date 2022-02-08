@@ -2,6 +2,8 @@
 -- Player spawning/dying
 -- @todo rework
 -- @section player_manager
+-- EDITED TO REMOVE DEATHSOUNDS at LINE 609 and HITBOX CHANGES.. Fallsounds were also changed
+
 
 local math = math
 local player = player
@@ -604,7 +606,7 @@ local deathsounds_count = #deathsounds
 local function PlayDeathSound(victim)
 	if not IsValid(victim) then return end
 
-	sound.Play(deathsounds[math.random(deathsounds_count)], victim:GetShootPos(), 90, 100)
+//	sound.Play(deathsounds[math.random(deathsounds_count)], victim:GetShootPos(), 90, 100)
 end
 
 ---
@@ -960,13 +962,11 @@ function GM:ScalePlayerDamage(ply, hitgroup, dmginfo)
 
 			dmginfo:ScaleDamage(s)
 		end
-	elseif hitgroup == HITGROUP_LEFTARM
-	or hitgroup == HITGROUP_RIGHTARM
-	or hitgroup == HITGROUP_LEFTLEG
+	elseif hitgroup == HITGROUP_LEFTLEG
 	or hitgroup == HITGROUP_RIGHTLEG
 	or hitgroup == HITGROUP_GEAR
 	then
-		dmginfo:ScaleDamage(0.55)
+		dmginfo:ScaleDamage(0.53)
 	end
 
 	-- Keep ignite-burn damage etc on old levels
@@ -996,9 +996,11 @@ function GM:GetFallDamage(ply, speed)
 end
 
 local fallsounds = {
-	Sound("player/damage1.wav"),
-	Sound("player/damage2.wav"),
-	Sound("player/damage3.wav")
+	Sound("physics/body/body_medium_impact_hard1.wav"),
+	Sound("physics/body/body_medium_impact_hard2.wav"),
+	Sound("physics/body/body_medium_impact_hard3.wav"),
+	Sound("physics/body/body_medium_impact_hard4.wav"),
+	Sound("physics/body/body_medium_impact_hard5.wav")
 }
 local fallsounds_count = #fallsounds
 
