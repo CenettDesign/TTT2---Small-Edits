@@ -367,8 +367,10 @@ end
 function CLSCORE:ReportEvents()
 	self:ClearPanel()
 
-	self:Init()
-	self:ShowPanel()
+	timer.Simple( 3, function()
+		self:Init()
+		self:ShowPanel()
+	end)
 end
 
 ---
